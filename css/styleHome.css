@@ -1,8 +1,39 @@
+/* Importing google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@300&display=swap');
+
+html{
+    font-family: 'Gemunu Libre', sans-serif;
+}
+
 body {
-    font-family: "Lato", sans-serif;
     background-color: #030303;
 }
 
+/* Styling Navbar Panel */
+.navbar{
+    width: 100.5%;
+    display: flex;
+    border: 2px solid grey;
+}
+
+.navbar a{
+    margin-right: 30px;
+    padding: 10px;
+    font-size: 1.4rem;
+    color: grey;
+    text-decoration: none;
+    margin-top: 5px;
+}
+
+.navbar a:active{
+    color: white;
+}
+
+.navbar a:hover{
+    color: white;
+}
+
+/* Projects nav */
 .sidenav {
     height: 100%;
     width: 350px;
@@ -13,27 +44,6 @@ body {
     background-color: #0a0c40;
     overflow-x: hidden;
     padding-top: 2px;
-}
-
-.projects {
-    overflow-y: auto;
-    max-height: 43%;
-}
-
-.pin {
-    height: 50%;
-    width: 324px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    background-color: #52514e;
-    overflow-x: hidden;
-    padding-top: 20px;
-    border-style: solid;
-    border-color: white;
-    padding-left: 10px;
-    padding-right: 10px;
 }
 
 .sidenav a {
@@ -52,18 +62,29 @@ body {
     color: #f1f1f1;
 }
 
-@media screen and (max-height: 450px) {
-    .sidenav {
-        padding-top: 15px;
-    }
-
-    .sidenav a {
-        font-size: 18px;
-    }
+.projects {
+    overflow-y: auto;
+    max-height: 43%;
+    padding: 10px;
 }
 
-input[type=text],
-input[type=password] {
+/* Pin a log pannel */
+.pin {
+    height: 50%;
+    width: 324px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    background-color: #52514e;
+    padding-top: 20px;
+    border-style: solid;
+    border-color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+input[type=text]{
     width: 80%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -72,6 +93,7 @@ input[type=password] {
     box-sizing: border-box;
 }
 
+/* Styling buttons */
 button {
     background-color: #1d0a40;
     color: white;
@@ -81,38 +103,20 @@ button {
     cursor: pointer;
     color: #ffffff;
     width: 80%;
+    font-family: 'Gemunu Libre', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
 }
 
 button:hover {
     opacity: 0.8;
 }
 
+/* Styling log pannel */
 .main {
     width: 74%;
     align-items: center;
     margin-left: 25%;
-}
-
-.navbar{
-    width: 99.5%;
-    display: flex;
-    border: 2px solid grey;
-}
-
-.navbar a{
-    margin-right: 30px;
-    padding: 10px;
-    font-size: 1.2rem;
-    color: grey;
-    text-decoration: none;
-}
-
-.navbar a:active{
-    color: white;
-}
-
-.navbar a:hover{
-    color: white;
 }
 
 .log{
@@ -125,9 +129,10 @@ button:hover {
 
 .image{
     height: 40px;
-    margin: 0px 7px;
+    margin: 0px 10px;
 }
 
+/* Pinned log cards */
 .pinnedLogs{
     margin-top: 10px;
     border: 2px solid white;
@@ -148,8 +153,24 @@ button:hover {
     border: 2px solid white;
 }
 
+.cards>p{
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
 .cards>img{
     height: 14px;
     display: flex;
     margin-left: auto;
+}
+
+/* Reponsive design */
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
 }

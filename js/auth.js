@@ -1,12 +1,6 @@
-console.log('Linked');
-
-// Import the functions you need from the SDKs you need
+//Project info 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyD7J-Jqb_Sdm2e6b75LzdwDJq05Q69gVe0",
     authDomain: "finalspaceconsole-71458.firebaseapp.com",
@@ -20,37 +14,31 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+//Importing auth functions
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut} from "https://www.gstatic.com/firebasejs/9.1.1/firebase-auth.js";
 
 const auth = getAuth();
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    const uid = user.uid;
-    // location.href = 'Dashboard.html';
-    // ...
-  } else {
-    // User is signed out
-    // ...
-  }
-});
+
+//Tracking login status
+// onAuthStateChanged(auth, (user) => {
+//   if (user) {
+//     const uid = user.uid;
+//   } else {
+//   }
+// });
 
 const login = document.getElementById('login');
 
 login.addEventListener('click', () => {
-  console.log('Clicked');
 
+  //Accessing user email and password
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
 
   signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
-    // Signed in 
     const user = userCredential.user;
-    location.href = 'Dashboard.html';
-    console.log('Logged in!');
-    
+    location.href = 'Dashboard.html';    
   })
   .catch((error) => {
     const errorCode = error.code;
