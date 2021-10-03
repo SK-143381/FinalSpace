@@ -34,7 +34,7 @@ body {
 }
 
 /* Projects nav */
-.sidenav {
+#projectTable {
     height: 100%;
     width: 350px;
     position: fixed;
@@ -46,9 +46,12 @@ body {
     padding-top: 2px;
 }
 
-.sidenav a {
+#projectTableItem td{
     padding: 6px 8px 6px 16px;
+    margin: 10px 10px 10px 10px;
     text-decoration: none;
+    text-align: center;
+    color: white;
     font-size: 25px;
     color: #818181;
     display: block;
