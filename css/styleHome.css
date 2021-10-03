@@ -1,0 +1,176 @@
+/* Importing google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@300&display=swap');
+
+html{
+    font-family: 'Gemunu Libre', sans-serif;
+}
+
+body {
+    background-color: #030303;
+}
+
+/* Styling Navbar Panel */
+.navbar{
+    width: 100.5%;
+    display: flex;
+    border: 2px solid grey;
+}
+
+.navbar a{
+    margin-right: 30px;
+    padding: 10px;
+    font-size: 1.4rem;
+    color: grey;
+    text-decoration: none;
+    margin-top: 5px;
+}
+
+.navbar a:active{
+    color: white;
+}
+
+.navbar a:hover{
+    color: white;
+}
+
+/* Projects nav */
+.sidenav {
+    height: 100%;
+    width: 350px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #0a0c40;
+    overflow-x: hidden;
+    padding-top: 2px;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    background-color: #050624;
+    border-style: solid;
+    border-width: 1px;
+    border-color: white;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.projects {
+    overflow-y: auto;
+    max-height: 43%;
+    padding: 10px;
+}
+
+/* Pin a log pannel */
+.pin {
+    height: 50%;
+    width: 324px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    background-color: #52514e;
+    padding-top: 20px;
+    border-style: solid;
+    border-color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+input[type=text]{
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Styling buttons */
+button {
+    background-color: #1d0a40;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
+    width: 80%;
+    font-family: 'Gemunu Libre', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Styling log pannel */
+.main {
+    width: 74%;
+    align-items: center;
+    margin-left: 25%;
+}
+
+.log{
+    display: flex;
+}
+
+.mediaUpload{
+    display: none;
+}
+
+.image{
+    height: 40px;
+    margin: 0px 10px;
+}
+
+/* Pinned log cards */
+.pinnedLogs{
+    margin-top: 10px;
+    border: 2px solid white;
+    height: 100px;
+    background-color: rgb(99, 99, 99);
+    padding: 10px;
+    display: flex;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+.cards{
+    background-color: #1d0a40;
+    color: white;
+    min-width: 200px;
+    padding: 10px;
+    margin-right: 10px;
+    border: 2px solid white;
+}
+
+.cards>p{
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+.cards>img{
+    height: 14px;
+    display: flex;
+    margin-left: auto;
+}
+
+/* Reponsive design */
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
