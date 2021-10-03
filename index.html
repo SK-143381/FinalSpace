@@ -72,15 +72,19 @@
                     id="logout">Logout</button>
             </div>
 
-            <textarea name="console" id="console" cols="150" rows="30" disabled></textarea>
+            <!--- CONSOLE LOG   -->
+            <div id = "console"> 
+                <table id="consoleTable">
+                </table>
+            </div> 
 
-            <form action="" class="log">
+            <div class="log">
                 <textarea name="log" id="log" cols="120" rows="1"></textarea>
                 <input type="file" name="media" id="media" class="btn mediaUpload">
                 <img src="/css/upload.png" alt="" class="image" id="uploadImage">
                 <button class="btn" id="submit"
                     style="width: 20%; margin: 0px; border: 2px solid white;">Submit</button>
-            </form>
+            </div>
 
             <div class="pinnedLogs">
                 <div class="cards">
