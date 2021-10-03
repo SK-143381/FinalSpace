@@ -112,8 +112,16 @@ function rowSelectorProjectTable(){
       table.rows[i].onclick = function(){
       rIndex = this.rowIndex;
 
+      var color_changeRows = document.getElementById("projectTableItem").getElementsByTagName("td");
+      
+      console.log(color_changeRows);
+      for(var j = 0; j <color_changeRows.length; j++){
+         color_changeRows[j].style.backgroundColor = "#050624"; 
+      }
+         
       //TODO: IMPLEMENT WHAT GOES HERE
       console.log(this.cells[0].innerHTML); 
+      this.cells[0].style.backgroundColor = "#ff8ce0";
       selected_project_title = this.cells[0].innerHTML; 
     };
   }
