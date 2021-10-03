@@ -1,11 +1,13 @@
 //Importing auth functions
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut} from "https://www.gstatic.com/firebasejs/9.1.1/firebase-auth.js";
-import { getFirestore, doc, getDoc, collection, query, where, onSnapshot} from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
+import { Timestamp, getFirestore, addDoc, doc, getDoc, collection, query, where, orderBy, onSnapshot} from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
 
 var db = getFirestore();
 const auth = getAuth();
 var project_list = []; 
+var selected_project_title = ""; 
 
+var user_name; 
 
 //Tracking login status
 onAuthStateChanged(auth, (user) => {
@@ -63,6 +65,14 @@ function clearTable(){
   }
 }
 
+function clearConsole(){
+  var table = document.getElementById('consoleTable');
+  var rowCount = table.rows.length;
+  for (var x=rowCount-1; x>=0; x--) {
+   table.deleteRow(x);
+  }
+}
+
 //Function to return the list of projects contained by a user. 
 async function returnProjectList(uid) { 
   const docRef = doc(db, "USERS", uid);
@@ -70,6 +80,7 @@ async function returnProjectList(uid) {
 
   if (docSnap.exists()) {
     project_list = docSnap.get("Project_title"); 
+    user_name = docSnap.get("Name"); 
     loadLogs();
     return docSnap.get("Project_title");
   } else {
@@ -103,6 +114,7 @@ function rowSelectorProjectTable(){
 
       //TODO: IMPLEMENT WHAT GOES HERE
       console.log(this.cells[0].innerHTML); 
+      selected_project_title = this.cells[0].innerHTML; 
     };
   }
 }
@@ -110,10 +122,11 @@ function rowSelectorProjectTable(){
 //function to load logs
 function loadLogs(){
   // Create the query to load the last 12 messages and listen for new ones.
-  const recentMessagesQuery = query(collection(db, 'LOGS'), where("project-title", "in", project_list));
+  const recentMessagesQuery = query(collection(db, 'LOGS'), where("project_title", "in", project_list), orderBy("time", "desc"));
   
   //listen to query 
   onSnapshot(recentMessagesQuery, (querySnapshot) => {
+    clearConsole(); 
     const listLogs = [];
     console.log(querySnapshot);
     querySnapshot.forEach((doc) => {
@@ -129,22 +142,58 @@ function loadLogs(){
 async function setConsoleTable(listLogs){
   var table = document.getElementById('consoleTable');
 
-  listLogs.forEach(function (item, index) {
-    console.log(item, index);    
+  listLogs.forEach(function (item, index) {  
     var newRow = table.insertRow(0);
     var cell1 = newRow.insertCell(0);
-    cell1.innerHTML =  item["project-title"] + "> " + Date(item.time).toString() + item.author + " : " + item.text; 
+    cell1.innerHTML =  item["project_title"] + "> " + item.time.toDate() + item.author + " : " + item.text; 
   });
 }
 
 //TODO: BUILD HERE 
 //Time Osrt setConsole table
 function setConsoleTableAfterTimeSort(listLogs){
+  console.log('List logs' + listLogs);
   setConsoleTable(listLogs);
 }
 
 
 
+//onSubmit 
+var submit = document.getElementById('submit');
+
+submit.addEventListener('click', ()=>{
+  var textField = document.getElementById('log');
+  
+  if(textField != null){
+    console.log(textField.value);
+    const currentDate = new Date();
+    const timestamp = currentDate.getTime();
+
+    if(selected_project_title != ""){
+      const project = selected_project_title; 
+      const author = user_name; 
+      var isLink = false; 
+      const textVal = textField.value; 
+
+      //GOES TO FIREBASE FROM HERE       
+      addDoc(collection(db, "LOGS"), {
+        author: author,
+        project_title: project,  
+        isLink: isLink, 
+        text: textVal, 
+        time: Timestamp.fromDate(new Date())
+      });
+
+
+    }else{
+      window.alert("SELECT A PROJECT");
+      return; 
+    }
+
+    textField.value = '';
+  }
+
+})
 
 
 //File upload
