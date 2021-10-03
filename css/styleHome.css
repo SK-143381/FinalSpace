@@ -61,6 +61,20 @@ body {
     border-color: white;
 }
 
+
+#console{
+    height: 430px;
+    width: 100%;
+    background-color: #eeeaf765;
+    overflow-x: hidden;
+    padding-top: 2px;
+}
+
+#consoleTable td {
+    color: black;
+  
+}
+
 .sidenav a:hover {
     color: #f1f1f1;
 }

@@ -1,9 +1,10 @@
 //Importing auth functions
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut} from "https://www.gstatic.com/firebasejs/9.1.1/firebase-auth.js";
-import { getFirestore, doc, getDoc} from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
+import { getFirestore, doc, getDoc, collection, query, where, onSnapshot} from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
 
 var db = getFirestore();
 const auth = getAuth();
+var project_list = []; 
 
 
 //Tracking login status
@@ -18,6 +19,7 @@ onAuthStateChanged(auth, (user) => {
   } else {
     document.getElementById('auth').style.display = 'block';
     document.getElementById('dashboard').style.display = 'none';
+    unsubscribe(); 
   }
 });
 
@@ -67,6 +69,8 @@ async function returnProjectList(uid) {
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
+    project_list = docSnap.get("Project_title"); 
+    loadLogs();
     return docSnap.get("Project_title");
   } else {
   console.log("No such document!"); 
@@ -102,6 +106,44 @@ function rowSelectorProjectTable(){
     };
   }
 }
+
+//function to load logs
+function loadLogs(){
+  // Create the query to load the last 12 messages and listen for new ones.
+  const recentMessagesQuery = query(collection(db, 'LOGS'), where("project-title", "in", project_list));
+  
+  //listen to query 
+  onSnapshot(recentMessagesQuery, (querySnapshot) => {
+    const listLogs = [];
+    console.log(querySnapshot);
+    querySnapshot.forEach((doc) => {
+        listLogs.push(doc.data());
+    });
+    console.log(listLogs);
+    setConsoleTableAfterTimeSort(listLogs);
+  });
+}
+
+
+//on log loaded/ updated build console table. 
+async function setConsoleTable(listLogs){
+  var table = document.getElementById('consoleTable');
+
+  listLogs.forEach(function (item, index) {
+    console.log(item, index);    
+    var newRow = table.insertRow(0);
+    var cell1 = newRow.insertCell(0);
+    cell1.innerHTML =  item["project-title"] + "> " + Date(item.time).toString() + item.author + " : " + item.text; 
+  });
+}
+
+//TODO: BUILD HERE 
+//Time Osrt setConsole table
+function setConsoleTableAfterTimeSort(listLogs){
+  setConsoleTable(listLogs);
+}
+
+
 
 
 
