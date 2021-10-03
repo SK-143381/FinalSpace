@@ -1,8 +1,8 @@
 /* Importing google fonts */
-@import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
 
 html{
-    font-family: 'Gemunu Libre', sans-serif;
+    font-family: 'Questrial', sans-serif;
 }
 
 body {
@@ -84,7 +84,7 @@ body {
     padding-right: 10px;
 }
 
-input[type=text]{
+.pinInput{
     width: 80%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -94,7 +94,7 @@ input[type=text]{
 }
 
 /* Styling buttons */
-button {
+.btn {
     background-color: #1d0a40;
     color: white;
     padding: 14px 20px;
