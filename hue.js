@@ -12,6 +12,15 @@ var selected_project_title = "";
 var user_name;
 var user_id;
 
+window.onload = (event) => {
+  console.log('page is fully loaded');
+  selected_project_title = 'My Console';
+  
+  var logPanel = document.getElementById('logPanel');
+  logPanel.classList.add('hide');
+
+};
+
 //Tracking login status
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -20,6 +29,7 @@ onAuthStateChanged(auth, (user) => {
     document.getElementById('dashboard').style.display = 'block';
     //set project table on side
     setProjectTable(user.uid); 
+    selected_project_title = 'My Console';
     getPins();
     
   } else {
@@ -98,8 +108,15 @@ async function setProjectTable(uid){
   var proj_list = await returnProjectList(uid); 
 
   var table = document.getElementById('projectTableItem');
+
+  var newRow = table.insertRow(0);
+  var cell1 = newRow.insertCell(0);
+  cell1.innerHTML = 'My Console';
+  cell1.style.backgroundColor = "#ff8ce0";
+
+
   proj_list.forEach(function (item, index) {
-    var newRow = table.insertRow(0);
+    var newRow = table.insertRow(1);
     var cell1 = newRow.insertCell(0);
     cell1.innerHTML = item; 
 
@@ -114,19 +131,46 @@ function rowSelectorProjectTable(){
   for(var i=0; i<table.rows.length; i++ ){
       table.rows[i].onclick = function(){
       rIndex = this.rowIndex;
-
+      
       var color_changeRows = document.getElementById("projectTableItem").getElementsByTagName("td");
       
       console.log(color_changeRows);
       for(var j = 0; j <color_changeRows.length; j++){
          color_changeRows[j].style.backgroundColor = "#050624"; 
+         color_changeRows[j].style.color = "#818181";
       }
-         
-      //TODO: IMPLEMENT WHAT GOES HERE
+      
+      var logPanel = document.getElementById('logPanel');
+      
       this.cells[0].style.backgroundColor = "#ff8ce0";
+      this.cells[0].style.color = "#000000";
       selected_project_title = this.cells[0].innerHTML; 
+      if(selected_project_title == 'My Console'){
+        loadLogs();
+        logPanel.classList.add('hide');
+      }
+      else{
+        filterLogs(selected_project_title);
+        logPanel.classList.remove('hide');
+      }
     };
   }
+}
+
+
+function filterLogs(project_title){
+  // console.log(project_title);
+  const recentMessagesQuery = query(collection(db, 'LOGS'), where("project_title", "==", project_title), orderBy("time", "desc"));
+
+  //listen to query 
+  onSnapshot(recentMessagesQuery, (querySnapshot) => {
+    clearConsole(); 
+    const listLogs = [];
+    querySnapshot.forEach((doc) => {
+        listLogs.push(doc.data());
+    });
+    setConsoleTableAfterTimeSort(listLogs);
+  });
 }
 
 //function to load logs
@@ -152,11 +196,17 @@ async function setConsoleTable(listLogs){
   listLogs.forEach(function (item, index) {  
     var newRow = table.insertRow(0);
     var cell1 = newRow.insertCell(0);
-    cell1.innerHTML =  item["project_title"] + "> " + item.time.toDate() + item.author + " : " + item.text; 
+
+    //Displaying text or link based on property 
+    if(item.isLink == true){
+      cell1.innerHTML =  item["project_title"] + "> " + item.time.toDate() + item.author + " : " + `<a href="${item.link}  " target="blank">${item.text}</a>` + "  " + item.desc;
+    }
+    else{
+      cell1.innerHTML =  item["project_title"] + "> " + item.time.toDate() + item.author + " : " + item.text; 
+    }
   });
 }
 
-//TODO: BUILD HERE 
 //Time Osrt setConsole table
 function setConsoleTableAfterTimeSort(listLogs){
   setConsoleTable(listLogs);
@@ -176,7 +226,7 @@ submit.addEventListener('click', ()=>{
       const project = selected_project_title; 
       const author = user_name; 
       var isLink = false; 
-      const textVal = textField.value; 
+      var textVal = textField.value; 
 
       //GOES TO FIREBASE FROM HERE       
       addDoc(collection(db, "LOGS"), {
@@ -238,13 +288,13 @@ uploadMedia.addEventListener('click', () => {
 
       //download url to the stoarge 
       var textField = document.getElementById('log');
-      textField.value = downloadURL; 
+      
       
       //to firebase
       const project = selected_project_title; 
       const author = user_name; 
       var isLink = true; 
-      const textVal = textField.value; 
+      const textVal = downloadURL; 
 
 
       //GOES TO FIREBASE FROM HERE       
@@ -252,7 +302,9 @@ uploadMedia.addEventListener('click', () => {
         author: author,
         project_title: project,  
         isLink: isLink, 
-        text: textVal, 
+        text: file.name, 
+        link: textVal, 
+        desc: textField.value,
         time: Timestamp.fromDate(new Date())
       });
 
@@ -319,10 +371,10 @@ async function addPin(user_name, project_title, text, timestamp) {
 async function getPins() {
   var mapPinId = new Map();
   var listPin = [];
-  const docRef = doc(db, "USERS", user_id);
   
+  // const querySnapshot = await getDocs(collection(db, "USERS", user_id, "PINNED"));
   const querySnapshot = await getDocs(collection(db, "USERS", user_id, "PINNED"));
-
+ 
   querySnapshot.forEach((doc) => {
     var id = doc.id;
     var data = doc.data();

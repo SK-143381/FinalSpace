@@ -6,12 +6,12 @@ html{
 }
 
 body {
-    background-color: #030303;
+    background-color: #030303; 
 }
 
 /* Styling Navbar Panel */
 .navbar{
-    width: 97.7%;
+    max-width: 97.7%;
     display: flex;
     border: 2px solid grey;
     color: white;
@@ -42,7 +42,8 @@ body {
 /* Projects nav */
 #projectTable {
     height: 100%;
-    width: 350px;
+    /* width: 350px; */
+    width: 22.5%;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -99,7 +100,7 @@ body {
 /* Pin a log pannel */
 .pin {
     height: 50%;
-    width: 324px;
+    width: 20.6%;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -183,11 +184,13 @@ button:hover {
     background-color: #1d0a40;
     color: white;
     min-width: 200px;
+    max-width: 200px;
     max-height: 100px;
     padding: 10px;
     margin-right: 10px;
     border: 2px solid white;
     overflow-x: scroll;
+    overflow-x: hidden;
     /* word-wrap: inherit;     */
 }
 
@@ -202,6 +205,7 @@ button:hover {
     display: flex;
     margin-left: auto;
 }
+
 
 /* Reponsive design */
 @media screen and (max-height: 450px) {
@@ -233,7 +237,7 @@ button:hover {
   }
   
   .modal-content {
-    margin: 10% auto;
+    margin: 3% auto;
     width: 60%;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
     animation-name: modalopen;
@@ -279,3 +283,37 @@ button:hover {
       opacity: 1;
     }
   }
+
+  .hide{
+      visibility: hidden;
+  }
+
+  /* Styling Cards Scrollbar */
+
+.cards::-webkit-scrollbar {
+    max-width: 0.30rem;
+    max-height: 0.45rem;
+    border-radius: 15px;
+    background-color: #0000;
+    scroll-behavior: smooth;
+} 
+  
+.cards::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.8);
+    border-radius: 15px;
+}
+
+/* Not needed but incase y'all want to change the colors or so */
+.cards::-webkit-scrollbar-track {
+    -webkit-border-radius: 16px;
+    border-radius: 16px;
+    background-color: rgba(66, 23, 146, 0.8);
+} 
+
+.cards::-webkit-scrollbar-corner {
+    visibility: hidden;
+}
+
+.cards::-webkit-scrollbar-thumb:hover {
+    background: white; 
+}
