@@ -1,7 +1,7 @@
 //Importing auth functions
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut} from "https://www.gstatic.com/firebasejs/9.1.1/firebase-auth.js";
 import { Timestamp, getFirestore,getDocs, addDoc, doc, getDoc, collection, query, where, orderBy, deleteDoc, onSnapshot} from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
-import { getStorage, ref , getDownloadURL, uploadBytes , uploadBytesResumable} from "https://www.gstatic.com/firebasejs/9.1.1/firebase-storage.js";
+import { getStorage, ref , getDownloadURL, uploadBytes, uploadBytesResumable} from "https://www.gstatic.com/firebasejs/9.1.1/firebase-storage.js";
 
 var db = getFirestore();
 const auth = getAuth();
@@ -13,7 +13,6 @@ var user_name;
 var user_id;
 
 window.onload = (event) => {
-  console.log('page is fully loaded');
   selected_project_title = 'My Console';
   
   var logPanel = document.getElementById('logPanel');
@@ -372,7 +371,6 @@ async function getPins() {
   var mapPinId = new Map();
   var listPin = [];
   
-  // const querySnapshot = await getDocs(collection(db, "USERS", user_id, "PINNED"));
   const querySnapshot = await getDocs(collection(db, "USERS", user_id, "PINNED"));
  
   querySnapshot.forEach((doc) => {
@@ -442,18 +440,45 @@ function openModal(filterPin) {
   
   for (var i = 0; i < filterPin.length; i++) {
     var fetch = document.querySelector('.modal-body').innerHTML;
-    dynamic.innerHTML = `<div>
-    <p class="modal-body">${filterPin[i].author} ${filterPin[i].time.toDate()} ${filterPin[i].project_title} : ${filterPin[i].text}</p>
-    </div>` + fetch;
+    const myPin = document.createElement('div');
+    myPin.style.display = 'flex';
+
+    const pinIt = document.createElement('p');
+    pinIt.classList.add('modal-body');
+    pinIt.innerHTML = `${filterPin[i].author} ${filterPin[i].time.toDate()} ${filterPin[i].project_title} : ${filterPin[i].text}`;
+    
+    const pinIcon = document.createElement('img');
+    pinIcon.src = "/css/pin.png";
+    pinIcon.style.height = '20px';
+    pinIcon.id = i;
+
+    // pinIt.appendChild(fetch);
+
+    myPin.appendChild(pinIt);
+    myPin.appendChild(pinIcon);
+ 
+    dynamic.appendChild(myPin);
+
+    pinIcon.addEventListener('click', async(event)=>{
+      console.log(filterPin[event.target.id]);
+      await addPin(`${filterPin[event.target.id].author}`, `${filterPin[event.target.id].project_title}`,`${filterPin[event.target.id].time.toDate()}`, `${filterPin[event.target.id].text}`);
+      // location.reload();
+    });
+    
+    // dynamic.innerHTML = `<div style = "display: flex;">
+    // <p class="modal-body">${filterPin[i].author} ${filterPin[i].time.toDate()} ${filterPin[i].project_title} : ${filterPin[i].text}</p>
+    // <img src="/css/pin.png" style = "height: 20px;" id="${i}">
+    // </div>` + fetch;
   }
 
-  const pinThese = document.querySelector('#pinLog');
-  pinLog.addEventListener('click', ()=>{
-    for(i=0; i<filterPin.length; i++){
-      addPin(`${filterPin[i].author}`, `${filterPin[i].project_title}`,`${filterPin[i].time.toDate()}`, `${filterPin[i].text}`);
-    }
-    location.reload();
-  });
+  // // const pinThese = document.querySelector('#pinLog');
+  // pinLog.addEventListener('click', (event)=>{
+  //   console.log(filterPin[event.target.id]);
+  //   for(i=0; i<filterPin.length; i++){
+  //     addPin(`${filterPin[i].author}`, `${filterPin[i].project_title}`,`${filterPin[i].time.toDate()}`, `${filterPin[i].text}`);
+  //   }
+  //   location.reload();
+  // });
   
  
 }
@@ -461,6 +486,7 @@ function openModal(filterPin) {
 // Close Modal 
 function closeModal() {
   modal.style.display = 'none';
+  location.reload();
 }
 
 // Close If Outside Click
