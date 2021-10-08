@@ -1,7 +1,7 @@
 # FinalSpace
 NASA Space Apps Hackathon
 
-![](https://c.tenor.com/G24ZSNHLmRUAAAAC/yahia-potato.gif)
+![](https://miro.medium.com/max/1838/1*X_FFeLvsgZ0Q-weKkc_byw.gif)
 
 :) 
 
@@ -29,6 +29,6 @@ A web console app built by:
 
 ![](https://i.pinimg.com/originals/c3/b3/bc/c3b3bc2747707184c9fa9b1b351ae582.gif)
 
-[Nahal Abdulla 2](https://github.com/Napster1445)
+[Nahal Abdulla](https://github.com/Napster1445)
 
 ![](https://media1.giphy.com/media/jpQJVRUD9lFNNPxnCX/giphy.gif?cid=790b76118a4f6ccc855b335ba6046a574945d3f83e481a0c&rid=giphy.gif&ct=g)
