@@ -35,13 +35,13 @@ p {
 
 div.transparentbox {
     float: right;
-    height: 590px;
+    height: 645px;
     width: 500px;
     color: white;
     font-size: 30px;
     background-color: rgba(64,32,254,0.5);
     border: 1px solid black;
-    margin: 50px;
+    margin: 30px 40px;
     align-items: center;
 }
 

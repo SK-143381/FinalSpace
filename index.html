@@ -7,6 +7,7 @@
     <!--Including styles-->
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/styleHome.css">
+    
 </head>
 
 <body>
@@ -34,82 +35,74 @@
         <div class="nav">
 
             <!--Table of Projects -->
-            <div id = "projectTable" style= "display:block">
-                <table id = "projectTableItem">
+            <div id="projectTable" style="display:block">
+                <table id="projectTableItem">
                 </table>
-             </div>
-
-             
+            </div>
 
             <div class="pin">
-                <form action="">
-                    <label for="topic"><strong>Topic:</strong></label><br>
-                    <center>
-                        <input type="text" placeholder="Enter Topic" id="topic" name="topic" class="pinInput"><br><br>
-                    </center>
-                    <label for="Author"><strong>Author Name:</strong></label><br>
-                    <center>
-                        <input type="text" placeholder="Enter Author Name" id="Author" name="Author" class="pinInput"><br><br>
-                    </center>
+                <label for="topic"><strong>Topic:</strong></label><br>
+                <center>
+                    <input type="text" placeholder="Enter Topic" id="topic" name="topic" class="pinInput"><br><br>
+                </center>
+                <label for="Author"><strong>Author Name:</strong></label><br>
+                <center>
+                    <input type="text" placeholder="Enter Author Name" id="author" name="Author"
+                        class="pinInput"><br><br>
+                </center>
 
-                    <label for="Date"><strong>Date:</strong></label><br>
-                    <center>
-                        <input type="text" placeholder="Enter Date" id="Date" name="Date" class="pinInput"><br><br>
-                        <button type="submit" class="btn"><strong>Pin Log<strong></button>
-                    </center>
-                </form>
+                <label for="Date"><strong>Date:</strong></label><br>
+                <center>
+                    <input type="text" placeholder="Enter Date (dd Month yyyy)" id="date" name="Date"
+                        class="pinInput"><br><br>
+                    <button type="submit" class="btn" id="filterPin"><strong>Pin Log<strong></button>
+                    <div id="my-modal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span class="close">&times;</span>
+                            </div>
+                            <div class="modal-body">
+
+                                <button class="btn" id="pinLog">Pin the logs</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </center>
             </div>
         </div>
 
         <!-- Log Panel -->
         <div class="main">
             <div class="navbar">
-                <a href="#timeTab">Time</a>
-                <a href="#authorTab">Author</a>
-                <a href="#topicTab">Topic</a>
-                <button
-                    style="width: 10%; margin-left: auto; margin-top: 0; margin-bottom: 0; margin-right: 0; border: 2px solid white;"
-                    id="logout">Logout</button>
+                <!-- <font class="dashBoardHeading">Welcome to H.U.E Dashboard </font> -->
+                Welcome to H.U.E Dashboard
+                <button style="width: 10%; margin-left: auto; margin-top: 0; margin-bottom: 0; margin-right: 0; border: 2px solid white;" id="logout" class="btn">Logout</button>
             </div>
 
             <!--- CONSOLE LOG   -->
-            <div id = "console"> 
+            <div id="console">
                 <table id="consoleTable">
                 </table>
-            </div> 
+            </div>
 
             <div class="log">
                 <textarea name="log" id="log" cols="120" rows="1"></textarea>
-                <input type="file" name="media" id="media" > <!-- class="btn mediaUpload"> -->
-              <!--  <img src="/css/upload.png" alt="" class="image" id="uploadImage"> -->
-              <button class="btn" id="uploadMedia"
+                <center><input type="file" name="media" id="media" class="mediaUpload"></center> <!-- class="btn mediaUpload"> -->
+                <!--  <img src="/css/upload.png" alt="" class="image" id="uploadImage"> -->
+                <button class="btn" id="uploadMedia"
                     style="width: 20%; margin: 0px; border: 2px solid white;">Upload</button>
                 <button class="btn" id="submit"
                     style="width: 20%; margin: 0px; border: 2px solid white;">Submit</button>
             </div>
 
             <div class="pinnedLogs">
-                <div class="cards">
-                    <img src="/css/close1.png" alt="">
-                    <p>Log 1</p>
-                </div>
-                <div class="cards">
-                    <img src="/css/close1.png" alt="">
-                    <p>Log 1</p>
-                </div>
-                <div class="cards">
-                    <img src="/css/close1.png" alt="">
-                    <p>Log 1</p>
-                </div>
-                <div class="cards">
-                    <img src="/css/close1.png" alt="">
-                    <p>Log 1</p>
-                </div>
+
             </div>
         </div>
     </div>
 
-    
+
     <script type="module">
         //Project info 
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
