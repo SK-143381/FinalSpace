@@ -461,26 +461,11 @@ function openModal(filterPin) {
 
     pinIcon.addEventListener('click', async(event)=>{
       console.log(filterPin[event.target.id]);
-      await addPin(`${filterPin[event.target.id].author}`, `${filterPin[event.target.id].project_title}`,`${filterPin[event.target.id].time.toDate()}`, `${filterPin[event.target.id].text}`);
-      // location.reload();
+      await addPin(`${filterPin[event.target.id].author}`, `${filterPin[event.target.id].project_title}`,`${filterPin[event.target.id].text}`, `${filterPin[event.target.id].time.toDate()}`);
+      window.alert('Pin added');
     });
     
-    // dynamic.innerHTML = `<div style = "display: flex;">
-    // <p class="modal-body">${filterPin[i].author} ${filterPin[i].time.toDate()} ${filterPin[i].project_title} : ${filterPin[i].text}</p>
-    // <img src="/css/pin.png" style = "height: 20px;" id="${i}">
-    // </div>` + fetch;
   }
-
-  // // const pinThese = document.querySelector('#pinLog');
-  // pinLog.addEventListener('click', (event)=>{
-  //   console.log(filterPin[event.target.id]);
-  //   for(i=0; i<filterPin.length; i++){
-  //     addPin(`${filterPin[i].author}`, `${filterPin[i].project_title}`,`${filterPin[i].time.toDate()}`, `${filterPin[i].text}`);
-  //   }
-  //   location.reload();
-  // });
-  
- 
 }
 
 // Close Modal 
