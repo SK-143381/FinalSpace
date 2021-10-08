@@ -11,9 +11,15 @@ body {
 
 /* Styling Navbar Panel */
 .navbar{
-    width: 100.5%;
+    width: 97.7%;
     display: flex;
     border: 2px solid grey;
+    color: white;
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 2%;
 }
 
 .navbar a{
@@ -46,6 +52,10 @@ body {
     padding-top: 2px;
 }
 
+#projectTableItem{
+    width: 85%;
+}
+
 #projectTableItem td{
     padding: 6px 8px 6px 16px;
     margin: 10px 10px 10px 10px;
@@ -59,6 +69,7 @@ body {
     border-style: solid;
     border-width: 1px;
     border-color: white;
+    min-width: 100%;
 }
 
 
@@ -141,7 +152,14 @@ button:hover {
 }
 
 .mediaUpload{
-    display: none;
+    color: white;
+    margin-top: 6.5%;
+    padding: 0px 15%;
+    /* border: 2px solid white; */
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: center; */
 }
 
 .image{
@@ -165,14 +183,18 @@ button:hover {
     background-color: #1d0a40;
     color: white;
     min-width: 200px;
+    max-height: 100px;
     padding: 10px;
     margin-right: 10px;
     border: 2px solid white;
+    overflow-x: scroll;
+    /* word-wrap: inherit;     */
 }
 
 .cards>p{
     font-size: 1.3rem;
     font-weight: 400;
+    word-wrap: break-word;    
 }
 
 .cards>img{
@@ -191,3 +213,69 @@ button:hover {
         font-size: 18px;
     }
 }
+
+/*Modal*/
+:root {
+    --modal-duration: 1s;
+    --modal-color: #428bca;
+  }
+   
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-content {
+    margin: 10% auto;
+    width: 60%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+    animation-name: modalopen;
+    animation-duration: var(--modal-duration);
+  }
+  
+ 
+  .modal-header {
+    background: var(--modal-color);
+    padding: 15px;
+    color: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 20px;
+  }
+  
+  .modal-body {
+    padding: 10px 20px;
+    background: #fff;
+    overflow-x: scroll;
+    font-size: 1.5rem !important;
+  }
+ 
+  .close {
+    color: #ccc;
+    float: right;
+    font-size: 30px;
+    color: #fff;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  @keyframes modalopen {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
