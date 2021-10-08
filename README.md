@@ -2,7 +2,6 @@
 NASA Space Apps Hackathon
 
 :) 
-<<<<<<< HEAD
 =======
 
 
