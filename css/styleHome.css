@@ -285,23 +285,6 @@ button:hover {
       visibility: hidden;
   }
 
-/* ::-webkit-scrollbar {
-    background-color: #0000;
-    max-width: 0.45rem;
-    max-height: 0.45rem;
-} 
-
-::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,0.8);
-    border-radius: 15px;
-}
-
-::-webkit-scrollbar-track {
-    -webkit-border-radius: 16px;
-    border-radius: 15px;
-    background-color: rgba(66, 23, 146, 0.8);
-}  */
-
   /* Styling Cards Scrollbar */
 
 .cards::-webkit-scrollbar {

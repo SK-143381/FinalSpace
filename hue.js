@@ -348,7 +348,7 @@ filterPin.addEventListener('click', async () => {
 });
 
 //Pinning logs
-async function addPin(user_name, project_title, text, timestamp) {
+async function addPin(user_name, project_title, text, timestamp, isLink) {
   const docRef = doc(db, "USERS", user_id);
   const docSnap = await getDoc(docRef);
   
@@ -357,7 +357,8 @@ async function addPin(user_name, project_title, text, timestamp) {
       author: user_name,
       time: timestamp,
       project_title: project_title,
-      text: text
+      text: text,
+      isLink: isLink,
     });  
   }
   else {
@@ -398,7 +399,13 @@ function pinCards(listPin) {
     
     //Rendering pinned logs information
     const logInfo = document.createElement('p');
-    logInfo.innerHTML = `${listPin[i].data.project_title}>${listPin[i].data.time} > ${listPin[i].data.author}: ${listPin[i].data.text}`;
+
+    if(listPin[i].data.isLink == "true"){
+      logInfo.innerHTML = `${listPin[i].data.project_title}>${listPin[i].data.time} > ${listPin[i].data.author}: <a href = "${listPin[i].data.link}"> ${listPin[i].data.text} </a>`;
+    }
+    else{
+      logInfo.innerHTML = `${listPin[i].data.project_title}>${listPin[i].data.time} > ${listPin[i].data.author}: ${listPin[i].data.text}`;
+    }
 
     //Injecting into card
     myCard.appendChild(closePinBtn);    
@@ -461,7 +468,7 @@ function openModal(filterPin) {
 
     pinIcon.addEventListener('click', async(event)=>{
       console.log(filterPin[event.target.id]);
-      await addPin(`${filterPin[event.target.id].author}`, `${filterPin[event.target.id].project_title}`,`${filterPin[event.target.id].text}`, `${filterPin[event.target.id].time.toDate()}`);
+      await addPin(`${filterPin[event.target.id].author}`, `${filterPin[event.target.id].project_title}`,`${filterPin[event.target.id].text}`, `${filterPin[event.target.id].time.toDate()}`, `${filterPin[event.target.id].isLink}`);
       window.alert('Pin added');
     });
     
